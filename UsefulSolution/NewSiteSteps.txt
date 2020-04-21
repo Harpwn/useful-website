@@ -1,7 +1,0 @@
-#New Site Steps
-
-1) rename database in connection string
-
-2) create database (dotnet ef database update)
-
-4) profit???
