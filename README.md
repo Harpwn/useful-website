@@ -1,5 +1,14 @@
 <h1>Useful Template</h1>
-<p>This will be a template for my future websites</p>
+<p>This will be a template for my future websites.</p>
+
+<h3>Included in this template</h3>
+<ul>
+	<li>Entity Framework Core Database Setup & Instructions</li>
+	<li>Entity Framework Core Identity User Management</li>
+	<li>Seeded SuperAdmin</li>
+	<li>CMS with User & Role Management</li>
+	<li>API With User Management</li>
+</ul>
 
 <h3>Settings up a new site</h3>
 <ul>
