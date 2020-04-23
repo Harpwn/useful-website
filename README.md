@@ -6,8 +6,8 @@
 	<li>Entity Framework Core Database Setup & Instructions</li>
 	<li>Entity Framework Core Identity User Management</li>
 	<li>Seeded SuperAdmin</li>
-	<li>CMS with User & Role Management</li>
-	<li>API With User Management</li>
+	<li>CMS with User & Role Management (WIP)</li>
+	<li>API With User Management (WIP)</li>
 </ul>
 
 <h3>Settings up a new site</h3>
