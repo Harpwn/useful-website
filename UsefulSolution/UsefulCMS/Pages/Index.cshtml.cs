@@ -1,25 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using UsefulCMS.Web;
+using UsefulCore.Enums.Roles;
+using UsefulDatabase.Model.Users;
 
 namespace UsefulCMS.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModel : CMSPageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private UserManager<User> _userManager;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public RoleType Role { get; set; }
+
+        public IndexModel(IMapper mapper, UserManager<User> userManager) : base(mapper)
         {
-            _logger = logger;
+            _userManager = userManager;
         }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-
+            //var user = await _userManager.GetUserAsync(HttpContext.User);
+            //Role = await _userManager.IsInRoleAsync(user, RoleType.SuperAdministrator.ToString()) ? RoleType.SuperAdministrator : RoleType.Administrator;
         }
     }
 }

@@ -30,3 +30,12 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+dist/

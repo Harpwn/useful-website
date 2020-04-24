@@ -1,0 +1,38 @@
+﻿<header>
+    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+
+        <div class="navbar-brand">
+            <a class="navbar-item" href="@Url.Action("Index","Home")">
+                <img src="~/img/logo-cms.png" alt="Useless CMS" width="auto" height="100%">
+            </a>
+        </div>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-primary" href="@Url.Action("Logout","Account")">
+                            <strong>Log Out</strong>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-primary" href="@Url.Action("Register","Account")">
+                            <strong>Sign up</strong>
+                        </a>
+                        <a class="button is-light" href="@Url.Action("Login","Account")">
+                            Log in
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </nav>
+</header>
