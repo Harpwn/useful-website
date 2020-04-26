@@ -56,7 +56,7 @@ namespace UsefulCMS
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            //IdentitySeeding(userManager, roleManager);
+            IdentitySeeding(userManager, roleManager);
 
             app.UseRouting();
 

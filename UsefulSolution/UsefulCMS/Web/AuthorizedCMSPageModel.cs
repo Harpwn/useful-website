@@ -1,16 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using static UsefulCore.Constants.Roles.RoleConstants;
 
 namespace UsefulCMS.Web
 {
-    public abstract class CMSPageModel : PageModel
+    [Authorize(Roles = Admin)]
+    public abstract class AuthorizedCMSPageModel : CMSPageModel
     {
-        internal IMapper _mapper;
-        public CMSPageModel(IMapper mapper)
+        public AuthorizedCMSPageModel(IMapper mapper) : base(mapper)
         {
         }
-
     }
 }

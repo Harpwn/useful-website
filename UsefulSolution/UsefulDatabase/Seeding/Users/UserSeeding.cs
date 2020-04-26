@@ -13,7 +13,7 @@ namespace UsefulDatabase.Seeding.Users
                 User user = new User();
                 user.UserName = "SuperAdmin";
 
-                IdentityResult result = userManager.CreateAsync(user, "changeme").Result;
+                IdentityResult result = userManager.CreateAsync(user, "ChangeMe!1234").Result;
 
                 if (result.Succeeded)
                 {

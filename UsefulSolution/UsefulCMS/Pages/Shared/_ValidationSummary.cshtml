@@ -1,0 +1,10 @@
+﻿@if (ViewData.ModelState.ContainsKey("") && ViewData.ModelState[""].Errors.Any())
+{
+    foreach (var error in ViewData.ModelState[""].Errors)
+    {
+    <div class="notification is-danger is-light">
+        <button class="delete"></button>
+        @error.ErrorMessage
+    </div>
+    }
+}

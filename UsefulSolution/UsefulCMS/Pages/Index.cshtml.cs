@@ -7,7 +7,7 @@ using UsefulDatabase.Model.Users;
 
 namespace UsefulCMS.Pages
 {
-    public class IndexModel : CMSPageModel
+    public class IndexModel : AuthorizedCMSPageModel
     {
         private UserManager<User> _userManager;
 
@@ -20,8 +20,8 @@ namespace UsefulCMS.Pages
 
         public async Task OnGetAsync()
         {
-            //var user = await _userManager.GetUserAsync(HttpContext.User);
-            //Role = await _userManager.IsInRoleAsync(user, RoleType.SuperAdministrator.ToString()) ? RoleType.SuperAdministrator : RoleType.Administrator;
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            Role = await _userManager.IsInRoleAsync(user, RoleType.SuperAdministrator.ToString()) ? RoleType.SuperAdministrator : RoleType.Administrator;
         }
     }
 }

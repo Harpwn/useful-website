@@ -11,6 +11,13 @@
     "bulma": "^0.8.2",
     "del": "^5.1.0",
     "gulp": "^4.0.2",
-    "merge-stream": "^2.0.0"
+    "gulp-concat": "^2.6.1",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-uglify-es": "^2.0.0",
+    "merge-stream": "^2.0.0",
+    "node-sass": "^4.14.0",
+    "rimraf": "^3.0.2"
   }
 }
