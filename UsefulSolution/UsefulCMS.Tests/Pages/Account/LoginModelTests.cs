@@ -14,7 +14,7 @@ using Xunit;
 
 namespace UsefulCMS.Tests.Pages.Account
 {
-    public class LoginModelTests : CMSModelTest
+    public class LoginModelTests : CMSModelTests
     {
         private readonly Mock<FakeSignInManager> mockSignInManager;
         private readonly Mock<FakeUserManager> mockUserManager;
@@ -63,7 +63,6 @@ namespace UsefulCMS.Tests.Pages.Account
             mockUrlHelper.Setup(x => x.IsLocalUrl(string.Empty)).Returns(true);
             mockSignInManager.Setup(x => x.PasswordSignInAsync(username, password, rememberMe, false)).ReturnsAsync(Microsoft.AspNetCore.Identity.SignInResult.Success);
             mockUserManager.Setup(x => x.FindByNameAsync(username)).ReturnsAsync(user);
-            mockUserManager.Setup(x => x.IsInRoleAsync(user, It.IsAny<string>())).ReturnsAsync(true);
 
             // Act
             var result = await model.OnPostAsync();
@@ -98,7 +97,6 @@ namespace UsefulCMS.Tests.Pages.Account
             mockUrlHelper.Setup(x => x.IsLocalUrl(returnUrl)).Returns(true);
             mockSignInManager.Setup(x => x.PasswordSignInAsync(username, password, rememberMe, false)).ReturnsAsync(Microsoft.AspNetCore.Identity.SignInResult.Success);
             mockUserManager.Setup(x => x.FindByNameAsync(username)).ReturnsAsync(user);
-            mockUserManager.Setup(x => x.IsInRoleAsync(user, It.IsAny<string>())).ReturnsAsync(true);
 
             // Act
             var result = await model.OnPostAsync();
@@ -133,7 +131,6 @@ namespace UsefulCMS.Tests.Pages.Account
             mockUrlHelper.Setup(x => x.IsLocalUrl(returnUrl)).Returns(false);
             mockSignInManager.Setup(x => x.PasswordSignInAsync(username, password, rememberMe, false)).ReturnsAsync(Microsoft.AspNetCore.Identity.SignInResult.Success);
             mockUserManager.Setup(x => x.FindByNameAsync(username)).ReturnsAsync(user);
-            mockUserManager.Setup(x => x.IsInRoleAsync(user, It.IsAny<string>())).ReturnsAsync(true);
 
             // Act
             var result = await model.OnPostAsync();
@@ -144,40 +141,7 @@ namespace UsefulCMS.Tests.Pages.Account
         }
 
         [Fact]
-        public async Task OnPost_ReturnsModel_WhenUserIsNotAdmin()
-        {
-            // Arrange
-            var username = "John";
-            var password = "abcd1234";
-            var rememberMe = true;
-            var mockUrlHelper = new Mock<IUrlHelper>(MockBehavior.Strict);
-            var model = new LoginModel(mockSignInManager.Object, mockUserManager.Object, mapper)
-            {
-                Username = username,
-                Password = password,
-                RememberMe = rememberMe,
-                Url = mockUrlHelper.Object
-            };
-            var user = new User()
-            {
-                UserName = username,
-            };
-
-            mockUrlHelper.Setup(x => x.IsLocalUrl(string.Empty)).Returns(true);
-            mockSignInManager.Setup(x => x.PasswordSignInAsync(username, password, rememberMe, false)).ReturnsAsync(Microsoft.AspNetCore.Identity.SignInResult.Success);
-            mockUserManager.Setup(x => x.FindByNameAsync(username)).ReturnsAsync(user);
-            mockUserManager.Setup(x => x.IsInRoleAsync(user, It.IsAny<string>())).ReturnsAsync(false);
-
-            // Act
-            var result = await model.OnPostAsync();
-
-            // Arrange
-            Assert.IsType<PageResult>(result);
-            Assert.False(model.ModelState.IsValid);
-        }
-
-        [Fact]
-        public async Task LoginPost_ReturnsModel_WhenInvalid()
+        public async Task OnPost_ReturnsModel_WhenInvalid()
         {
             // Arrange
             // Arrange

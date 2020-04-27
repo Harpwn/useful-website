@@ -1,0 +1,84 @@
+﻿@page
+@model UsefulCMS.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Pages/Account/_Layout.cshtml";
+}
+
+    <section class="hero is-primary is-fullheight">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-centered">
+                    <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+                        <div class="tabs is-large is-toggle is-centered">
+                            <ul>
+                                <li>
+                                    <a href="@Url.Page("/Account/Login")">
+                                        <span class="icon is-small"><i class="fas fa-user-lock" aria-hidden="true"></i></span>
+                                        <span>Login</span>
+                                    </a>
+                                </li>
+                                <li class="is-active">
+                                    <a href="@Url.Page("/Account/Register")">
+                                        <span class="icon is-small"><i class="fas fa-user-plus" aria-hidden="true"></i></span>
+                                        <span>Register</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <form class="box" method="post" role="form">
+                            <partial name="_ValidationSummary" />
+                            <div class="field">
+                                <label asp-for="Username"></label>
+                                <div class="control has-icons-left">
+                                    <input asp-for="Username"
+                                           type="text"
+                                           placeholder="e.g. bobsmith@gmail.com"
+                                           class="input"
+                                           required />
+                                    <span class="icon is-small is-left">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
+                                </div>
+                                <span asp-validation-for="Username" class="help is-danger"></span>
+                            </div>
+                            <div class="field">
+                                <label asp-for="viewModel.Password"></label>
+                                <div class="control has-icons-left">
+                                    <input asp-for="viewModel.Password"
+                                           type="password"
+                                           placeholder="*******"
+                                           class="input"
+                                           required />
+                                    <span class="icon is-small is-left">
+                                        <i class="fa fa-lock"></i>
+                                    </span>
+                                </div>
+                                <span asp-validation-for="viewModel.Password" class="help is-danger"></span>
+                            </div>
+                            <div class="field">
+                                <label asp-for="viewModel.ConfirmPassword"></label>
+                                <div class="control has-icons-left">
+                                    <input asp-for="viewModel.ConfirmPassword"
+                                           type="password"
+                                           placeholder="*******"
+                                           class="input"
+                                           required />
+                                    <span class="icon is-small is-left">
+                                        <i class="fa fa-lock"></i>
+                                    </span>
+                                </div>
+                                <span asp-validation-for="viewModel.ConfirmPassword" class="help is-danger"></span>
+                            </div>
+                            <div class="field">
+                                <button type="submit" class="button is-success">
+                                    Register
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+

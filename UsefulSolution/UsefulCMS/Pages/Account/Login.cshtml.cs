@@ -57,30 +57,17 @@ namespace UsefulCMS.Pages.Account
 
                 if (user != null)
                 {
-                    var isAdmin = await _userManager.IsInRoleAsync(user, RoleType.Administrator.ToString());
-                    var isSuperAdmin = await _userManager.IsInRoleAsync(user, RoleType.SuperAdministrator.ToString());
-
-                    if (isAdmin || isSuperAdmin)
+                    var result = await _signInManager.PasswordSignInAsync(Username, Password, RememberMe, false);
+                    if (result.Succeeded)
                     {
-                        var result = await _signInManager.PasswordSignInAsync(Username, Password, RememberMe, false);
-
-                        if (result.Succeeded)
+                        if (!string.IsNullOrEmpty(ReturnUrl) && Url.IsLocalUrl(ReturnUrl))
                         {
-
-                            if (!string.IsNullOrEmpty(ReturnUrl) && Url.IsLocalUrl(ReturnUrl))
-                            {
-                                return Redirect(ReturnUrl);
-                            }
-                            else
-                            {
-                                return RedirectToPage("/Index");
-                            }
+                            return Redirect(ReturnUrl);
                         }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Only Administrators can access this part of the system");
-                        return Page();
+                        else
+                        {
+                            return RedirectToPage("/Index");
+                        }
                     }
                 }
             }

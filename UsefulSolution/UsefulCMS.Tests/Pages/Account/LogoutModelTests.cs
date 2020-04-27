@@ -10,7 +10,7 @@ using Xunit;
 
 namespace UsefulCMS.Tests.Pages.Account
 {
-    public class LogoutModelTests : CMSModelTest
+    public class LogoutModelTests : CMSModelTests
     {
         private readonly Mock<FakeSignInManager> mockSignInManager;
 

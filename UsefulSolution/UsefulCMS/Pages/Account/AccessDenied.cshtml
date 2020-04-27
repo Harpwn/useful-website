@@ -1,0 +1,26 @@
+﻿@page
+@model UsefulCMS.Pages.Account.AccessDeniedModel
+@{
+    ViewData["Title"] = "AccessDenied";
+    Layout = "~/Pages/Account/_Layout.cshtml";
+}
+
+    <section class="hero is-warning is-fullheight">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-centered">
+                    <div class="column is-6-tablet is-6-desktop is-6-widescreen">
+                        <h1 class="title">
+                                <i class="fas fa-exclamation-triangle"></i>
+                             &nbsp;Access Denied
+                        </h1>
+                        <div class="notification is-light">
+                            Whilst you are a registered user on this system, your current role does not allow you to access the CMS. 
+                            If you think this is incorrect please contact an administrator and ask them to change your role. 
+                        </div>
+                        <a href="@Url.Page("/Account/Logout")" class="button is-primary">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

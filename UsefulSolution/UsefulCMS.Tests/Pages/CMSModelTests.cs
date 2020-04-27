@@ -2,11 +2,11 @@
 
 namespace UsefulCMS.Tests.Pages
 {
-    public abstract class CMSModelTest
+    public abstract class CMSModelTests
     {
         internal IMapper mapper;
 
-        public CMSModelTest()
+        public CMSModelTests()
         {
             var configuration = new MapperConfiguration(cfg =>
                 cfg.AddMaps(new[] {

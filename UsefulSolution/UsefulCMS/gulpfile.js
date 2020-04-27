@@ -7,6 +7,7 @@ const gulp = require("gulp"),
       rimraf = require("rimraf"),
       concat = require("gulp-concat"),
       cssmin = require("gulp-cssmin"),
+      rename = require("gulp-rename"),
       uglify = require('gulp-uglify-es').default;
 
 sass.compiler = require('node-sass');
@@ -56,9 +57,9 @@ gulp.task("clean", gulp.series("clean:js", "clean:css", "clean:lib"));
 
 gulp.task("min:js", function () {
     return gulp.src([paths.js, "!" + paths.minJs], { base: "." })
-        .pipe(concat(paths.concatJsDest))
         .pipe(uglify())
-        .pipe(gulp.dest("."));
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(gulp.dest('.'));
 });
 
 gulp.task("min:css", function () {
