@@ -16,62 +16,20 @@
         }
     </div>
     <div class="tile is-ancestor">
-        <div class="tile is-vertical is-8">
+        <div class="tile is-vertical is-6">
             <div class="tile is-parent">
                 <article class="tile is-child notification is-white">
-                    <h4 class="title is-4">Account Details</h4>
-                    <form method="post" role="form">
-                        <partial name="_ValidationSummary" />
-                        <div class="field">
-                            <label asp-for="Username"></label>
-                            <div class="control has-icons-left">
-                                <input asp-for="Username"
-                                       type="text"
-                                       placeholder="e.g. bobsmith@gmail.com"
-                                       class="input"
-                                       required
-                                       disabled />
-                                <span class="icon is-small is-left">
-                                    <i class="fa fa-envelope"></i>
-                                </span>
-                            </div>
-                            <span asp-validation-for="Username" class="help is-danger"></span>
-                        </div>
-                        <div class="field">
-                            <label asp-for="EmailAddress"></label>
-                            <div class="control has-icons-left">
-                                <input asp-for="EmailAddress"
-                                       type="email"
-                                       placeholder="e.g. bobsmith@gmail.com"
-                                       class="input"
-                                       required
-                                       disabled />
-                                <span class="icon is-small is-left">
-                                    <i class="fa fa-envelope"></i>
-                                </span>
-                            </div>
-                            <span asp-validation-for="EmailAddress" class="help is-danger"></span>
-                        </div>
-                        <div class="field">
-                            <button type="submit" class="button is-success" disabled>
-                                Save Changes
-                            </button>
-                        </div>
-                    </form>
+                    <partial name="Manage/_AccountDetailsForm" />
                 </article>
             </div>
         </div>
         <div class="tile is-parent">
-            <article class="tile is-child notification is-success">
+            <article class="tile is-child notification is-dark">
                 <div class="content">
-                    <p class="title">Tall tile</p>
-                    <p class="subtitle">With even more content</p>
-                    <div class="content">
-                        <!-- Content -->
-                    </div>
+                    <partial name="Manage/_ChangePasswordForm" />
                 </div>
             </article>
         </div>
     </div>
 </div>
-<partial name="_DeleteAccountModal" />
+<partial name="Manage/_DeleteAccountModal" />

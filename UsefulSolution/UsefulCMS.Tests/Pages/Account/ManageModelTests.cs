@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -72,13 +73,13 @@ namespace UsefulCMS.Tests.Pages.Account
             // Arrange
             var model = new ManageModel(mockUserManager.Object, mockSignInManager.Object, mapper);
             model.ModelState.AddModelError("Username", "Required");
+            mockUserManager.Setup(x => x.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(new User());
 
             // Act
             var result = await model.OnPostDeleteAsync();
 
             // Arrange
-            var redirectToPageResult = Assert.IsType<RedirectToPageResult>(result);
-            Assert.Equal("/Account/Manage", redirectToPageResult.PageName);
+            Assert.IsType<PageResult>(result);
         }
 
         [Fact]
@@ -105,6 +106,115 @@ namespace UsefulCMS.Tests.Pages.Account
             // Arrange
             var redirectToPageResult = Assert.IsType<RedirectToPageResult>(result);
             Assert.Equal("/Account/Login", redirectToPageResult.PageName);
+        }
+
+        [Fact]
+        public async Task OnPostChangePasswordAsync_WhenValid_ReturnPage()
+        {
+            // Arrange
+            var username = "test";
+            var email = "test@test.test";
+            var oldPassword = "password1";
+            var newPassword = "password2";
+            var user = new User
+            {
+                UserName = username,
+                Email = email
+            };
+            var model = new ManageModel(mockUserManager.Object, mockSignInManager.Object, mapper)
+            {
+                Username = username,
+                EmailAddress = email,
+                ChangePasswordInput = new ManageModel.ChangePasswordInputModel
+                {
+                    OldPassword = oldPassword,
+                    NewPassword = newPassword,
+                    NewPasswordConfirm = newPassword
+                }
+            };
+            model.PageContext.HttpContext = new DefaultHttpContext();
+            mockUserManager.Setup(x => x.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
+            mockUserManager.Setup(x => x.CheckPasswordAsync(user, oldPassword)).ReturnsAsync(true);
+            mockUserManager.Setup(x => x.ChangePasswordAsync(user, oldPassword, newPassword)).ReturnsAsync(Microsoft.AspNetCore.Identity.IdentityResult.Success);
+            // Act
+            var result = await model.OnPostChangePasswordAsync();
+
+            // Arrange
+            Assert.True(model.ModelState.IsValid);
+            Assert.IsType<PageResult>(result);
+        }
+
+        [Fact]
+        public async Task OnPostChangePasswordAsync_WhenInvalid_ReturnsPage()
+        {
+            // Arrange
+            var username = "test";
+            var email = "test@test.test";
+            var oldPassword = "password1";
+            var newPassword = "password2";
+            var user = new User
+            {
+                UserName = username,
+                Email = email
+            };
+            var model = new ManageModel(mockUserManager.Object, mockSignInManager.Object, mapper)
+            {
+                Username = username,
+                EmailAddress = email,
+                ChangePasswordInput = new ManageModel.ChangePasswordInputModel
+                {
+                    OldPassword = oldPassword,
+                    NewPassword = newPassword,
+                    NewPasswordConfirm = null
+                }
+            };
+            model.PageContext.HttpContext = new DefaultHttpContext();
+            mockUserManager.Setup(x => x.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
+            mockUserManager.Setup(x => x.CheckPasswordAsync(user, oldPassword)).ReturnsAsync(true);
+            model.ModelState.AddModelError("ChangePasswordInput.NewPasswordConfirm", "Required");
+
+            // Act
+            var result = await model.OnPostChangePasswordAsync();
+
+            // Arrange
+            Assert.False(model.ModelState.IsValid);
+            Assert.IsType<PageResult>(result);
+        }
+
+        [Fact]
+        public async Task OnPostChangePasswordAsync_WhenOldPasswordIncorrect_ReturnPage()
+        {
+            // Arrange
+            var username = "test";
+            var email = "test@test.test";
+            var oldPassword = "password1";
+            var newPassword = "password2";
+            var user = new User
+            {
+                UserName = username,
+                Email = email
+            };
+            var model = new ManageModel(mockUserManager.Object, mockSignInManager.Object, mapper)
+            {
+                Username = username,
+                EmailAddress = email,
+                ChangePasswordInput = new ManageModel.ChangePasswordInputModel
+                {
+                    OldPassword = oldPassword,
+                    NewPassword = newPassword,
+                    NewPasswordConfirm = newPassword
+                }
+            };
+            model.PageContext.HttpContext = new DefaultHttpContext();
+            mockUserManager.Setup(x => x.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
+            mockUserManager.Setup(x => x.CheckPasswordAsync(user, oldPassword)).ReturnsAsync(false);
+
+            // Act
+            var result = await model.OnPostChangePasswordAsync();
+
+            // Arrange
+            Assert.False(model.ModelState.IsValid);
+            Assert.IsType<PageResult>(result);
         }
     }
 }
