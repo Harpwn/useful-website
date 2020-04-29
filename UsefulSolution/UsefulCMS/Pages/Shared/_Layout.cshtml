@@ -9,14 +9,36 @@
 <body>
     <partial name="_NavigationBar" />
     <main role="main" class="columns is-marginless">
-        <div class="column is-narrow has-background-light">
+        <div class="column is-one-fifth-widescreen is-one-quarter-desktop is-narrow-tablet has-background-light">
             <partial name="_SideMenu" />
         </div>
-        <div class="column">
-            @RenderBody()
+        <div class="column is-paddingless main-content-container">
+            <section class="hero is-primary main-title-section">
+                <div class="hero-body">
+                    <div class="container">
+                        <div class="level">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <h1 class="title">@ViewData["Title"]</h1>
+                                </div>
+                            </div>
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <span class="icon is-small"><i class="fas fa-2x @ViewData["IconClass"]" aria-hidden="true"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section main-content-section has-background-primary">
+                <div class="container">
+                    @RenderBody()
+                </div>
+            </section>
         </div>
     </main>
-    <partial name="_Footer" />
+    <!--partial name="_Footer" /-->
     <partial name="_SiteScripts" />
     @RenderSection("Scripts", required: false)
 </body>

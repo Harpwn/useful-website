@@ -7,3 +7,16 @@
 body main {
     flex-grow: 1
 }
+
+.main-content-container {
+    display: flex;
+    flex-direction: column;
+
+    .main-content-section {
+        flex-grow: 1;
+    }
+}
+
+.main-side-menu {
+    padding: 1rem;
+}

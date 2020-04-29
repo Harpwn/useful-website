@@ -1,0 +1,45 @@
+﻿@model ManageModel
+<div id="delete-account-modal" class="modal">
+    <form asp-page="/Account/Manage" asp-page-handler="delete" method="post">
+        @Html.HiddenFor(m => m.Username)
+        @Html.HiddenFor(m => m.EmailAddress)
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div class="notification is-warning">
+                <section class="hero is-small">
+                    <div class="hero-body">
+                        <div class="container">
+                            <div class="level">
+                                <div class="level-left">
+                                    <div class="level-item">
+                                        <h1 class="title">Are you sure?</h1>
+                                    </div>
+                                </div>
+                                <div class="level-right">
+                                    <div class="level-item">
+                                        <span class="icon is-small"><i class="fas fa-2x fa-trash" aria-hidden="true"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="section">
+                    <div class="container">
+                        <p>Deleting an account is permanent, there is no way to undo this account once it is confirmed. Are you 100% sure you want to delete your user account?</p>
+                    </div>
+                </section>
+                <section class="hero is-small">
+                    <div class="hero-body">
+                        <div class="container">
+                            <div class="buttons is-center">
+                                <button class="button is-danger">Confirm Account Deletion</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </form>
+</div>

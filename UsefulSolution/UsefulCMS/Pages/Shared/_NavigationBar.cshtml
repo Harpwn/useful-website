@@ -18,7 +18,12 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
-                            <a class="button is-primary" href="@Url.Page("Account/Logout")">
+                            <a href="@Url.Page("/Account/Manage")" class="button">
+                                <span class="icon is-small">
+                                    <i class="fas fa-user-cog"></i>
+                                </span>
+                            </a>
+                            <a class="button is-primary" href="@Url.Page("/Account/Logout")">
                                 <strong>Log Out</strong>
                             </a>
                         </div>
