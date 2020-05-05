@@ -3,11 +3,41 @@
 
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Dashboard";
+    ViewData["IconClass"] = "fa-tachometer-alt";
 }
 
-<section class="section">
-    <div class="container">
-        <h1>this is the home page</h1>
-    </div>
+<h3 class="title is-4 is-warning has-text-white">
+    <span class="icon">
+        <i class="fas fa-users"></i>
+    </span> 
+    Users &amp; Roles
+</h3>
+<section class="section box">
+    <nav class="level">
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Total</p>
+                <p class="title">@Model.UserCount</p>
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Standard</p>
+                <p class="title">@Model.StandardCount</p>
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">Administrator</p>
+                <p class="title">@Model.AdminCount</p>
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading">SuperAdmin</p>
+                <p class="title">@Model.SuperAdminCount</p>
+            </div>
+        </div>
+    </nav>
 </section>

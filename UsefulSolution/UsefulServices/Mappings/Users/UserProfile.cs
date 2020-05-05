@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using UsefulDatabase.Model.Users;
-using UsefulServices.Dtos.Users;
 
 namespace UsefulServices.Mappings.Users
 {
@@ -8,7 +7,6 @@ namespace UsefulServices.Mappings.Users
     {
         public UserProfile()
         {
-            CreateMap<User, UserDto>();
         }
     }
 }

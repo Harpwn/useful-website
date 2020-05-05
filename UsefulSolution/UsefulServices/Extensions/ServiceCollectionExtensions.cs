@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using UsefulServices.Services.Users;
 
 namespace UsefulServices.Extensions
 {
@@ -6,6 +7,7 @@ namespace UsefulServices.Extensions
     {
         public static void AddCoreServices(this IServiceCollection services)
         {
+            services.AddScoped<IUserService, UserService>();
         }
     }
 }

@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using UsefulCore.Enums.Roles;
+using UsefulDatabase.Model.Users;
 using static UsefulCore.Constants.Roles.RoleConstants;
 
 namespace UsefulCMS.Web

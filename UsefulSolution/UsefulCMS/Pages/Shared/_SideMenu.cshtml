@@ -1,10 +1,19 @@
 ﻿
 <aside class="menu main-side-menu">
     <p class="menu-label">
-        <i class="fas fa-users-cog"></i> Administration
+        <i class="fas fa-shapes"></i> General
     </p>
     <ul class="menu-list">
-        <li><a>Users</a></li>
-        <li><a>Roles</a></li>
+        <li><a href="@Url.Page("/Index")">Dashboard</a></li>
     </ul>
+    @if (User.IsInRole("SuperAdministrator"))
+    {
+        <p class="menu-label">
+            <i class="fas fa-users-cog"></i> Administration
+        </p>
+        <ul class="menu-list">
+            <li><a>Users</a></li>
+            <li><a>Roles</a></li>
+        </ul>
+    }
 </aside>
