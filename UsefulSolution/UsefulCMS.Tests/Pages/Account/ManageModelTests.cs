@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Moq;
-using System;
-using System.Collections.Generic;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using UsefulCMS.Pages.Account;
 using UsefulDatabase.Model.Users;
@@ -25,6 +24,14 @@ namespace UsefulCMS.Tests.Pages.Account
             mockUserManager = new Mock<FakeUserManager>();
         }
 
+        public ManageModel GetManageModel(
+            UserManager<User> userManager = null,
+            SignInManager<User> signInManager = null,
+            IMapper mapper = null) => new ManageModel(
+                userManager ?? new Mock<FakeUserManager>().Object,
+                signInManager ?? new Mock<FakeSignInManager>().Object,
+                mapper ?? new Mock<IMapper>().Object);
+
         [Fact]
         public async Task OnGetAsync_GetsPage()
         {
@@ -36,7 +43,7 @@ namespace UsefulCMS.Tests.Pages.Account
                 UserName = username,
                 Email = email
             };
-            var model = new ManageModel(mockUserManager.Object, mockSignInManager.Object, mapper);
+            var model = GetManageModel(mockUserManager.Object, mockSignInManager.Object, mapper);
             model.PageContext.HttpContext = new DefaultHttpContext();
             mockUserManager.Setup(x => x.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
 
@@ -52,10 +59,8 @@ namespace UsefulCMS.Tests.Pages.Account
         public async Task OnPostDeleteAsync_ReturnsForbidden_WhenUserIsSuperAdmin()
         {
             // Arrange
-            var model = new ManageModel(mockUserManager.Object, mockSignInManager.Object, mapper)
-            {
-                Username = "SuperAdmin"
-            };
+            var model = GetManageModel(mockUserManager.Object, mockSignInManager.Object, mapper);
+            model.Username = "SuperAdmin";
             model.PageContext.HttpContext = new DefaultHttpContext();
             mockUserManager.Setup(x => x.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(new User());
 
@@ -71,7 +76,7 @@ namespace UsefulCMS.Tests.Pages.Account
         public async Task OnPostDeleteAsync_Redirects_WhenNotValid()
         {
             // Arrange
-            var model = new ManageModel(mockUserManager.Object, mockSignInManager.Object, mapper);
+            var model = GetManageModel(mockUserManager.Object, mockSignInManager.Object, mapper);
             model.ModelState.AddModelError("Username", "Required");
             mockUserManager.Setup(x => x.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(new User());
 
@@ -91,10 +96,8 @@ namespace UsefulCMS.Tests.Pages.Account
             {
                 UserName = username
             };
-            var model = new ManageModel(mockUserManager.Object, mockSignInManager.Object, mapper)
-            {
-                Username = username
-            };
+            var model = GetManageModel(mockUserManager.Object, mockSignInManager.Object, mapper);
+            model.Username = username;
             model.PageContext.HttpContext = new DefaultHttpContext();
             mockUserManager.Setup(x => x.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
             mockSignInManager.Setup(x => x.SignOutAsync());
@@ -121,17 +124,17 @@ namespace UsefulCMS.Tests.Pages.Account
                 UserName = username,
                 Email = email
             };
-            var model = new ManageModel(mockUserManager.Object, mockSignInManager.Object, mapper)
+            var model = GetManageModel(mockUserManager.Object, mockSignInManager.Object, mapper);
+
+            model.Username = username;
+            model.EmailAddress = email;
+            model.ChangePasswordInput = new ManageModel.ChangePasswordInputModel
             {
-                Username = username,
-                EmailAddress = email,
-                ChangePasswordInput = new ManageModel.ChangePasswordInputModel
-                {
-                    OldPassword = oldPassword,
-                    NewPassword = newPassword,
-                    NewPasswordConfirm = newPassword
-                }
+                OldPassword = oldPassword,
+                NewPassword = newPassword,
+                NewPasswordConfirm = newPassword
             };
+
             model.PageContext.HttpContext = new DefaultHttpContext();
             mockUserManager.Setup(x => x.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
             mockUserManager.Setup(x => x.CheckPasswordAsync(user, oldPassword)).ReturnsAsync(true);
@@ -157,17 +160,16 @@ namespace UsefulCMS.Tests.Pages.Account
                 UserName = username,
                 Email = email
             };
-            var model = new ManageModel(mockUserManager.Object, mockSignInManager.Object, mapper)
+            var model = GetManageModel(mockUserManager.Object, mockSignInManager.Object, mapper);
+            model.Username = username;
+            model.EmailAddress = email;
+            model.ChangePasswordInput = new ManageModel.ChangePasswordInputModel
             {
-                Username = username,
-                EmailAddress = email,
-                ChangePasswordInput = new ManageModel.ChangePasswordInputModel
-                {
-                    OldPassword = oldPassword,
-                    NewPassword = newPassword,
-                    NewPasswordConfirm = null
-                }
+                OldPassword = oldPassword,
+                NewPassword = newPassword,
+                NewPasswordConfirm = null
             };
+
             model.PageContext.HttpContext = new DefaultHttpContext();
             mockUserManager.Setup(x => x.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
             mockUserManager.Setup(x => x.CheckPasswordAsync(user, oldPassword)).ReturnsAsync(true);
@@ -194,17 +196,16 @@ namespace UsefulCMS.Tests.Pages.Account
                 UserName = username,
                 Email = email
             };
-            var model = new ManageModel(mockUserManager.Object, mockSignInManager.Object, mapper)
+            var model = GetManageModel(mockUserManager.Object, mockSignInManager.Object, mapper);
+            model.Username = username;
+            model.EmailAddress = email;
+            model.ChangePasswordInput = new ManageModel.ChangePasswordInputModel
             {
-                Username = username,
-                EmailAddress = email,
-                ChangePasswordInput = new ManageModel.ChangePasswordInputModel
-                {
-                    OldPassword = oldPassword,
-                    NewPassword = newPassword,
-                    NewPasswordConfirm = newPassword
-                }
+                OldPassword = oldPassword,
+                NewPassword = newPassword,
+                NewPasswordConfirm = newPassword
             };
+            
             model.PageContext.HttpContext = new DefaultHttpContext();
             mockUserManager.Setup(x => x.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
             mockUserManager.Setup(x => x.CheckPasswordAsync(user, oldPassword)).ReturnsAsync(false);

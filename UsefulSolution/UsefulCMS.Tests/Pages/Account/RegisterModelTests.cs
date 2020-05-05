@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Moq;
@@ -26,11 +28,19 @@ namespace UsefulCMS.Tests.Pages.Account
             mockUserManager = new Mock<FakeUserManager>();
         }
 
+        public RegisterModel GetRegisterModel(
+            SignInManager<User> signInManager = null,
+            UserManager<User> userManager = null,
+            IMapper mapper = null) => new RegisterModel(
+                signInManager ?? new Mock<FakeSignInManager>().Object,
+                userManager ?? new Mock<FakeUserManager>().Object,
+                mapper ?? new Mock<IMapper>().Object);
+
         [Fact]
         public void OnGet_RedirectsToHome_WhenUserIsSignedIn()
         {
             //Arrange
-            var model = new RegisterModel(mockSignInManager.Object, mockUserManager.Object, mapper);
+            var model = GetRegisterModel(mockSignInManager.Object, mockUserManager.Object, mapper);
             model.PageContext.HttpContext = new DefaultHttpContext();
             mockSignInManager.Setup(x => x.IsSignedIn(It.IsAny<ClaimsPrincipal>())).Returns(true);
 
@@ -46,7 +56,7 @@ namespace UsefulCMS.Tests.Pages.Account
         public async Task OnPost_ReturnsModel_WhenInvalid()
         {
             // Arrange
-            var model = new RegisterModel(mockSignInManager.Object, mockUserManager.Object, mapper);
+            var model = GetRegisterModel(mockSignInManager.Object, mockUserManager.Object, mapper);
             model.ModelState.AddModelError("Password", "Required");
 
             // Act
@@ -63,15 +73,14 @@ namespace UsefulCMS.Tests.Pages.Account
             // Arrange
             var username = "test";
             var password = "abcd1234";
-            var model = new RegisterModel(mockSignInManager.Object, mockUserManager.Object, mapper)
+            var model = GetRegisterModel(mockSignInManager.Object, mockUserManager.Object, mapper);
+            model.Username = username;
+            model.viewModel = new RegisterModel.ViewModel
             {
-                Username = username,
-                viewModel = new RegisterModel.ViewModel
-                {
-                    Password = password,
-                    ConfirmPassword = password
-                }
+                Password = password,
+                ConfirmPassword = password
             };
+
             var user = new User
             {
                 UserName = username,

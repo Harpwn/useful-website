@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Moq;
@@ -25,11 +26,19 @@ namespace UsefulCMS.Tests.Pages.Account
             mockUserManager = new Mock<FakeUserManager>();
         }
 
+        public LoginModel GetLoginModel(
+            SignInManager<User> signInManager = null,
+            UserManager<User> userManager = null,
+            IMapper mapper = null) => new LoginModel(
+                signInManager ?? new Mock<FakeSignInManager>().Object,
+                userManager ?? new Mock<FakeUserManager>().Object,
+                mapper ?? new Mock<IMapper>().Object);
+
         [Fact]
         public void OnGet_RedirectsToIndex_WhenUserIsSignedIn()
         {
             // Arrange
-            var model = new LoginModel(mockSignInManager.Object, mockUserManager.Object, mapper);
+            var model = GetLoginModel(mockSignInManager.Object, mockUserManager.Object, mapper);
             mockSignInManager.Setup(x => x.IsSignedIn(It.IsAny<ClaimsPrincipal>())).Returns(true);
 
             // Act
@@ -48,13 +57,12 @@ namespace UsefulCMS.Tests.Pages.Account
             var password = "abcd1234";
             var rememberMe = true;
             var mockUrlHelper = new Mock<IUrlHelper>(MockBehavior.Strict);
-            var model = new LoginModel(mockSignInManager.Object, mockUserManager.Object, mapper)
-            {
-                Username = username,
-                Password = password,
-                RememberMe = rememberMe,
-                Url = mockUrlHelper.Object
-            };
+            var model = GetLoginModel(mockSignInManager.Object, mockUserManager.Object, mapper);
+            model.Username = username;
+            model.Password = password;
+            model.RememberMe = rememberMe;
+            model.Url = mockUrlHelper.Object;
+
             var user = new User()
             {
                 UserName = username,
@@ -81,14 +89,13 @@ namespace UsefulCMS.Tests.Pages.Account
             var returnUrl = "/game";
             var rememberMe = true;
             var mockUrlHelper = new Mock<IUrlHelper>(MockBehavior.Strict);
-            var model = new LoginModel(mockSignInManager.Object, mockUserManager.Object, mapper)
-            {
-                Username = username,
-                Password = password,
-                RememberMe = rememberMe,
-                ReturnUrl = returnUrl,
-                Url = mockUrlHelper.Object
-            };
+            var model = GetLoginModel(mockSignInManager.Object, mockUserManager.Object, mapper);
+            model.Username = username;
+            model.Password = password;
+            model.RememberMe = rememberMe;
+            model.ReturnUrl = returnUrl;
+            model.Url = mockUrlHelper.Object;
+
             var user = new User()
             {
                 UserName = username,
@@ -115,14 +122,14 @@ namespace UsefulCMS.Tests.Pages.Account
             var returnUrl = "www.google.com";
             var rememberMe = true;
             var mockUrlHelper = new Mock<IUrlHelper>(MockBehavior.Strict);
-            var model = new LoginModel(mockSignInManager.Object, mockUserManager.Object, mapper)
-            {
-                Username = username,
-                Password = password,
-                RememberMe = rememberMe,
-                ReturnUrl = returnUrl,
-                Url = mockUrlHelper.Object
-            };
+            var model = GetLoginModel(mockSignInManager.Object, mockUserManager.Object, mapper);
+
+            model.Username = username;
+            model.Password = password;
+            model.RememberMe = rememberMe;
+            model.ReturnUrl = returnUrl;
+            model.Url = mockUrlHelper.Object;
+
             var user = new User()
             {
                 UserName = username,
@@ -147,12 +154,10 @@ namespace UsefulCMS.Tests.Pages.Account
             // Arrange
             var username = "John";
             var mockUrlHelper = new Mock<IUrlHelper>(MockBehavior.Strict);
-            var model = new LoginModel(mockSignInManager.Object, mockUserManager.Object, mapper)
-            {
-                Username = username,
-                Password = null,
-                Url = mockUrlHelper.Object
-            };
+            var model = GetLoginModel(mockSignInManager.Object, mockUserManager.Object, mapper);
+            model.Username = username;
+            model.Password = null;
+            model.Url = mockUrlHelper.Object;
 
             mockUrlHelper.Setup(x => x.IsLocalUrl(string.Empty)).Returns(true);
             model.ModelState.AddModelError("Password", "Required");
