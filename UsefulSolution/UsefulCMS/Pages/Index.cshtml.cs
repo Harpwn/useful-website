@@ -1,33 +1,39 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using System;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using UsefulCMS.Web;
+using UsefulCMS.Models;
 using UsefulCore.Enums.Roles;
-using UsefulDatabase.Model.Users;
-using UsefulServices.Services.Users;
+using UsefulDatabase.Model;
 
 namespace UsefulCMS.Pages
 {
     public class IndexModel : AuthorizedCMSPageModel
     {
-        public int UserCount => SuperAdminCount + AdminCount + StandardCount;
+        private readonly UsefulContext _context;
+
+        public int UserCount { get; set; }
         public int SuperAdminCount { get; set; }
         public int AdminCount { get; set; }
         public int StandardCount { get; set; }
 
-        private UserManager<User> _userManager;
-
-        public IndexModel(UserManager<User> userManager, IMapper mapper) : base(mapper)
+        public IndexModel(IMapper mapper, UsefulContext context) : base(mapper)
         {
-            _userManager = userManager;
+            _context = context;
         }
 
         public async Task OnGetAsync()
         {
-            SuperAdminCount = (await _userManager.GetUsersInRoleAsync(RoleType.SuperAdministrator.ToString())).Count;
-            AdminCount = (await _userManager.GetUsersInRoleAsync(RoleType.Administrator.ToString())).Count;
-            StandardCount = (await _userManager.GetUsersInRoleAsync(RoleType.Standard.ToString())).Count;
+            SuperAdminCount = await CountForRole(RoleType.SuperAdministrator.ToString());
+            AdminCount = await CountForRole(RoleType.Administrator.ToString());
+            StandardCount = await CountForRole(RoleType.Standard.ToString());
+            UserCount = await _context.Users.CountAsync();
+
+            async Task<int> CountForRole(string role)
+            {
+                return await _context.Users.Where(u => u.Roles.Any(r => r.Role.Name == role)).CountAsync();
+            }
         }
     }
 }

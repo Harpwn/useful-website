@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using UsefulCMS.Web;
+using UsefulCMS.Models;
 using UsefulCore.Enums.Roles;
 using UsefulDatabase.Model.Users;
 

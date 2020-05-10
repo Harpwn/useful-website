@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using UsefulCMS.Web;
+using UsefulCMS.Models;
 using UsefulDatabase.Model.Users;
 
 namespace UsefulCMS.Pages.Account

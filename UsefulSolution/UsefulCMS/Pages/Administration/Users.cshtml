@@ -1,0 +1,117 @@
+﻿@page
+
+@using UsefulCore.Enums.Roles
+
+@model UsefulCMS.Pages.Administration.UsersModel
+@{
+    ViewData["Title"] = "Users";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    var prevDisabled = !Model.Users.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Users.HasNextPage ? "disabled" : "";
+}
+
+<div class="container">
+    <div class="buttons box">
+        <form class="container" asp-page="/Administration/Users" method="get">
+            <div class="form-actions no-color">
+                <div class="field has-addons">
+                    <div class="control has-icons-left">
+                        <input class="input" type="text" placeholder="Search" name="SearchString" value="@Model.CurrentFilter">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-search"></i>
+                        </span>
+                    </div>
+                    <div class="control">
+                        <button class="button is-info" type="submit" value="Search">
+                            <span class="icon is-small">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="control">
+                        <a class="button is-danger" asp-page="/Administration/Users">
+                            <span class="icon is-small">
+                                <i class="fas fa-sync"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+        <a asp-page="/Administration/Users"
+           asp-route-sortOrder="@Model.CurrentSort"
+           asp-route-pageIndex="@(Model.Users.PageIndex - 1)"
+           asp-route-currentFilter="@Model.CurrentFilter"
+           class="button is-info" disabled="@prevDisabled">
+            <span class="icon is-small">
+                <i class="fas fa-arrow-circle-left"></i>
+            </span>
+            <span>Previous</span>
+        </a>
+        <a asp-page="/Administration/Users"
+           asp-route-sortOrder="@Model.CurrentSort"
+           asp-route-pageIndex="@(Model.Users.PageIndex + 1)"
+           asp-route-currentFilter="@Model.CurrentFilter"
+           class="button is-info" disabled="@nextDisabled">
+            <span class="icon is-small">
+                <i class="fas fa-arrow-circle-right"></i>
+            </span>
+            <span>Next</span>
+        </a>
+    </div>
+    <div class="tile box is-12">
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <thead>
+                <tr>
+                    <th>
+                        <a asp-page="/Administration/Users" asp-route-sortOrder="@Model.UsernameSort" asp-route-currentFilter="@Model.CurrentFilter">
+                            @Html.DisplayNameFor(model => model.Users[0].UserName)
+                            <span class="icon is-small">
+                                <i class="fas fa-@(Model.UsernameSort.Contains("desc") ? "sort-down" : "sort-up")"></i>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a asp-page="/Administration/Users" asp-route-sortOrder="@Model.EmailSort" asp-route-currentFilter="@Model.CurrentFilter">
+                            @Html.DisplayNameFor(model => model.Users[0].Email)
+                            @if (!string.IsNullOrWhiteSpace(Model.EmailSort))
+                            {
+                                <span class="icon is-small">
+                                    <i class="fas fa-@(Model.EmailSort.Contains("desc") ? "sort-down" : "sort-up")"></i>
+                                </span>
+                            }
+                        </a>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Users[0].Roles)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Users)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @foreach (var role in item.Roles)
+                            {
+                                <span class="tag @role.RoleTypeIconClass()">@role.GetDisplayName()</span>
+                            }
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

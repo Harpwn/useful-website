@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using UsefulCMS.Web;
+using UsefulCMS.Models;
 using UsefulCore.Enums.Roles;
 using UsefulDatabase.Model.Roles;
 using UsefulDatabase.Model.Users;

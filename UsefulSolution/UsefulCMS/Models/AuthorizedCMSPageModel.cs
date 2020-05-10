@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using UsefulCore.Enums.Roles;
-using UsefulDatabase.Model.Users;
+using UsefulDatabase.Model;
 using static UsefulCore.Constants.Roles.RoleConstants;
 
-namespace UsefulCMS.Web
+namespace UsefulCMS.Models
 {
     [Authorize(Roles = Admin)]
     public abstract class AuthorizedCMSPageModel : CMSPageModel

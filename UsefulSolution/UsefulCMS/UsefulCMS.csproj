@@ -19,13 +19,17 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\UsefulCore\UsefulCore.csproj" />
     <ProjectReference Include="..\UsefulDatabase\UsefulDatabase.csproj" />
     <ProjectReference Include="..\UsefulServices\UsefulServices.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Search\" />
   </ItemGroup>
 
 </Project>

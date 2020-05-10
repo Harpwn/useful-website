@@ -16,6 +16,7 @@ using UsefulDatabase.Model.Roles;
 using UsefulDatabase.Model.Users;
 using static UsefulServices.Extensions.ServiceCollectionExtensions;
 using static UsefulDatabase.Seeding.Seeding;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace UsefulCMS
 {
@@ -33,7 +34,11 @@ namespace UsefulCMS
             services.AddRazorPages();
             services.AddDbContext<UsefulContext>(options => options.UseSqlServer(Configuration["database:connection"], b => b.MigrationsAssembly("UsefulDatabase")));
             services.AddSingleton(provider => Configuration);
-            services.AddIdentity<User, Role>().AddEntityFrameworkStores<UsefulContext>().AddDefaultTokenProviders();
+            services.AddIdentity<User, Role>()
+                .AddUserStore<UserStore<User, Role, UsefulContext, int, IdentityUserClaim<int>, UserRole, IdentityUserLogin<int>, IdentityUserToken<int>, IdentityRoleClaim<int>>>()
+                .AddRoleStore<RoleStore<Role, UsefulContext, int, UserRole, IdentityRoleClaim<int>>>()
+                .AddDefaultTokenProviders();
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddCoreServices();
             services.AddMemoryCache();

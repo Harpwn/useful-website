@@ -1,16 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using UsefulCore.Enums.Roles;
+using UsefulCore.Models.Users;
 using UsefulDatabase.Model;
 using UsefulDatabase.Model.Users;
-using UsefulServices.Dtos.Users;
 
 namespace UsefulServices.Services.Users
 {
@@ -30,7 +25,12 @@ namespace UsefulServices.Services.Users
             if (existingUser == null)
                 return new UserActionResult("User not found");
 
-            return new UserActionResult(Mapper.Map<UserDto>(existingUser));
+            return new UserActionResult(Mapper.Map<UserSummary>(existingUser));
+        }
+
+        public Task<IEnumerable<UserRoleSummary>> GetUserRoleSummaryAsync()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using UsefulCMS.Web;
-using UsefulCore.Enums.Roles;
+using UsefulCMS.Models;
 using UsefulDatabase.Model.Users;
 
 namespace UsefulCMS.Pages.Account
