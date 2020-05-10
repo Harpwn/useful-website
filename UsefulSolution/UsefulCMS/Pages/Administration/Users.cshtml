@@ -5,6 +5,7 @@
 @model UsefulCMS.Pages.Administration.UsersModel
 @{
     ViewData["Title"] = "Users";
+    ViewData["IconClass"] = "fa-users";
     Layout = "~/Pages/Shared/_Layout.cshtml";
     var prevDisabled = !Model.Users.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.Users.HasNextPage ? "disabled" : "";
