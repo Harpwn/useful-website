@@ -1,0 +1,28 @@
+﻿@model (bool hasPrevious, bool hasNext,string currentSort, string currentFilter, int pageIndex)
+
+@if (Model.hasPrevious)
+{
+    <a asp-page="./Index"
+       asp-route-sortOrder="@Model.currentSort"
+       asp-route-pageIndex="@(Model.pageIndex - 1)"
+       asp-route-currentFilter="@Model.currentFilter"
+       class="button is-info">
+        <span class="icon is-small">
+            <i class="fas fa-arrow-circle-left"></i>
+        </span>
+        <span>Previous</span>
+    </a>
+}
+@if (Model.hasNext)
+{
+    <a asp-page="./Index"
+       asp-route-sortOrder="@Model.currentSort"
+       asp-route-pageIndex="@(Model.pageIndex + 1)"
+       asp-route-currentFilter="@Model.currentFilter"
+       class="button is-info">
+        <span class="icon is-small">
+            <i class="fas fa-arrow-circle-right"></i>
+        </span>
+        <span>Next</span>
+    </a>
+}

@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.3">
       <PrivateAssets>all</PrivateAssets>
@@ -26,10 +27,6 @@
     <ProjectReference Include="..\UsefulCore\UsefulCore.csproj" />
     <ProjectReference Include="..\UsefulDatabase\UsefulDatabase.csproj" />
     <ProjectReference Include="..\UsefulServices\UsefulServices.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Search\" />
   </ItemGroup>
 
 </Project>

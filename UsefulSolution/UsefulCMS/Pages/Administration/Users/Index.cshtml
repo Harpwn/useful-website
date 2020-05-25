@@ -1,0 +1,67 @@
+﻿@page
+
+@using UsefulCore.Enums.Roles
+
+@model UsefulCMS.Pages.Administration.Users.IndexModel
+@{
+    ViewData["Title"] = "Users";
+    ViewData["IconClass"] = "fa-users";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <partial name="Search/_DataTableViewHeader" model="(Model.ItemList.HasPreviousPage,Model.ItemList.HasNextPage,Model.CurrentSort,Model.CurrentFilter,Model.ItemList.PageIndex)" />
+    <div class="tile box is-12">
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <thead>
+                <tr>
+                    <th>
+                        <a asp-page="./Index" asp-route-sortOrder="@Model.UsernameSort" asp-route-currentFilter="@Model.CurrentFilter">
+                            @Html.DisplayNameFor(model => model.ItemList[0].UserName)
+                            <span class="icon is-small">
+                                <i class="fas fa-@(Model.UsernameSort.Contains("desc") ? "sort-down" : "sort-up")"></i>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a asp-page="./Index" asp-route-sortOrder="@Model.EmailSort" asp-route-currentFilter="@Model.CurrentFilter">
+                            @Html.DisplayNameFor(model => model.ItemList[0].Email)
+                            @if (!string.IsNullOrWhiteSpace(Model.EmailSort))
+                            {
+                                <span class="icon is-small">
+                                    <i class="fas fa-@(Model.EmailSort.Contains("desc") ? "sort-down" : "sort-up")"></i>
+                                </span>
+                            }
+                        </a>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ItemList[0].Roles)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ItemList)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @foreach (var role in item.Roles)
+                            {
+                                <span class="tag @role.RoleTypeIconClass()">@role.GetDisplayName()</span>
+                            }
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
