@@ -7,6 +7,5 @@ namespace UsefulServices.Services.Users
     public interface IUserService
     {
         Task<UserActionResult> GetByIDAsync(string id);
-        Task<IEnumerable<UserRoleSummary>> GetUserRoleSummaryAsync();
     }
 }

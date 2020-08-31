@@ -27,10 +27,5 @@ namespace UsefulServices.Services.Users
 
             return new UserActionResult(Mapper.Map<UserSummary>(existingUser));
         }
-
-        public Task<IEnumerable<UserRoleSummary>> GetUserRoleSummaryAsync()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

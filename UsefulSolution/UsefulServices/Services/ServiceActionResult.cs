@@ -30,7 +30,7 @@ namespace UsefulServices.Services
         {
             if (Errors.Any() && !Succeeded)
             {
-                if (Errors.Count() > 1)
+                if (Errors.Count() == 1)
                 {
                     return Errors.First();
                 }
