@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UsefulDatabase.Model;
 
 namespace UsefulDatabase.Migrations
 {
     [DbContext(typeof(UsefulContext))]
-    partial class UsefulContextModelSnapshot : ModelSnapshot
+    [Migration("20200831150600_02_userbanning")]
+    partial class _02_userbanning
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

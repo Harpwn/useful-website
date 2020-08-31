@@ -27,6 +27,9 @@ namespace UsefulCMS.Pages.Administration.Users
                    Id = u.Id,
                    Email = u.Email,
                    UserName = u.UserName,
+                   BannedReason = u.BannedReason,
+                   IsBanned = u.IsBanned,
+                   BannedUntilDate = u.BannedUntilDate,
                    Roles = u.Roles.Select(r => r.Role.Type).ToList()
                };
 

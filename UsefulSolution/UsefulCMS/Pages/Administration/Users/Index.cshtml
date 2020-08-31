@@ -46,6 +46,10 @@
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.UserName)
+                            @if (item.IsBanned)
+                            {
+                                <span class="tag is-danger">Banned</span>
+                            }
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Email)

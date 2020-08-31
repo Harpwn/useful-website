@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using UsefulCore.Models.Users;
+﻿using System.Threading.Tasks;
 
 namespace UsefulServices.Services.Users
 {
