@@ -1,22 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using UsefulDatabase.Model;
 using UsefulDatabase.Model.Roles;
 using UsefulDatabase.Model.Users;
-using static UsefulServices.Extensions.ServiceCollectionExtensions;
 using static UsefulDatabase.Seeding.Seeding;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using static UsefulServices.Extensions.ServiceCollectionExtensions;
 
 namespace UsefulCMS
 {

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using UsefulCMS.Models;
 using UsefulDatabase.Model.Users;
 
@@ -89,7 +89,7 @@ namespace UsefulCMS.Pages.Account
             {
                 throw new NotImplementedException();
             }
-                
+
             return await LoadPage();
         }
 

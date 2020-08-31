@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using UsefulDatabase.Model;
 using static UsefulCore.Constants.Roles.RoleConstants;
 
 namespace UsefulCMS.Models

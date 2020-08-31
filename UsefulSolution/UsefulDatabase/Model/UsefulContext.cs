@@ -6,7 +6,7 @@ using UsefulDatabase.Model.Users;
 
 namespace UsefulDatabase.Model
 {
-    public class UsefulContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int>, UserRole, IdentityUserLogin<int>,IdentityRoleClaim<int>,IdentityUserToken<int>>
+    public class UsefulContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int>, UserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
         public UsefulContext(DbContextOptions<UsefulContext> options)
             : base(options)

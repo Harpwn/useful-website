@@ -2,8 +2,8 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Drawing;
-using System.IO;
 using System.Drawing.Imaging;
+using System.IO;
 
 namespace UsefulCore.Attributes.Validation
 {

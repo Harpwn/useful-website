@@ -1,17 +1,12 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Moq;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using UsefulCMS.Pages;
 using UsefulCore.Enums.Roles;
 using UsefulDatabase.Model;
 using UsefulDatabase.Model.Roles;
 using UsefulDatabase.Model.Users;
-using UsefulTestingCore.Fakes.Identity;
 using UsefulTestingCore.Fixtures;
 using Xunit;
 

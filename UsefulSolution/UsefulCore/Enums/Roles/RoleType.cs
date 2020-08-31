@@ -16,6 +16,6 @@
                 RoleType.Administrator => "is-success",
                 _ => string.Empty,
             };
-        
+
     }
 }

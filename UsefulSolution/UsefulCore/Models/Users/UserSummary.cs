@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace UsefulCore.Models.Users
+﻿namespace UsefulCore.Models.Users
 {
     public class UserSummary
     {

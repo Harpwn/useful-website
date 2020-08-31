@@ -205,7 +205,7 @@ namespace UsefulCMS.Tests.Pages.Account
                 NewPassword = newPassword,
                 NewPasswordConfirm = newPassword
             };
-            
+
             model.PageContext.HttpContext = new DefaultHttpContext();
             mockUserManager.Setup(x => x.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
             mockUserManager.Setup(x => x.CheckPasswordAsync(user, oldPassword)).ReturnsAsync(false);

@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Http;
 using UsefulCMS.Search;
 using UsefulDatabase.Model;
-using Microsoft.EntityFrameworkCore;
 
 namespace UsefulCMS.Models.Search
 {
     public abstract class DataTableModel<TEntity, TPageSearch> : AuthorizedCMSPageModel
-        where TPageSearch: PageSearch
-        where TEntity: class
+        where TPageSearch : PageSearch
+        where TEntity : class
     {
         protected readonly UsefulContext Context;
 
@@ -23,7 +23,7 @@ namespace UsefulCMS.Models.Search
             Context = context;
         }
 
-        public async Task OnGetAsync([FromUri]TPageSearch data)
+        public async Task OnGetAsync([FromQuery]TPageSearch data)
         {
             CurrentSort = data.SortOrder;
             SetupSort(data);
