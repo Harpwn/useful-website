@@ -14,21 +14,15 @@
                 <button class="button is-danger modal-launcher" data-modal-id="delete-account-modal">Delete Account</button>
             </form>
         }
+        <a class="button is-info" href="@Url.Page("/Account/ChangePassword")">Change Password</a>
     </div>
     <div class="tile is-ancestor">
-        <div class="tile is-vertical is-6">
+        <div class="tile is-vertical is-12">
             <div class="tile is-parent">
                 <article class="tile is-child notification is-white">
                     <partial name="Manage/_AccountDetailsForm" />
                 </article>
             </div>
-        </div>
-        <div class="tile is-parent">
-            <article class="tile is-child notification is-dark">
-                <div class="content">
-                    <partial name="Manage/_ChangePasswordForm" />
-                </div>
-            </article>
         </div>
     </div>
 </div>

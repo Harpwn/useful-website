@@ -1,0 +1,44 @@
+﻿@page
+@model UsefulCMS.Pages.Administration.Users.DetailsModel
+@{
+    ViewData["Title"] = "User Details - " + @Model.UserDetails.UserName;
+    ViewData["IconClass"] = "fa-user";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="buttons">
+        @if (!Model.UserDetails.IsBanned)
+        {
+            <a class="button is-danger" href="@Url.Page("/Administration/Users/BanUser", new { id=Model.Id })">Ban User</a>
+        }
+    </div>
+    @if (Model.UserDetails.IsBanned)
+    {
+        <div class="tile is-ancestor">
+            <div class="tile is-vertical is-6">
+                <div class="tile is-parent">
+                    <article class="tile is-child notification is-dark">
+                        <h4 class="title is-4">This user is banned <i class="fa fa-user-slash"></i></h4>
+                        <p><b>Banned Until: </b>@Html.DisplayFor(m => m.UserDetails.BannedUntilDate)</p>
+                        <p><b>Ban Reason: </b>@Model.UserDetails.BannedReason</p>
+                        <hr />
+                        <form asp-page-handler="UnBanUser" quer method="post">
+                            <input type="hidden" name="id" value="@Model.Id" />
+                            <button class="button is-danger">Remove Ban</button>
+                        </form>
+                    </article>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="tile is-ancestor">
+        <div class="tile is-vertical is-12">
+            <div class="tile is-parent">
+                <article class="tile is-child notification is-white">
+                    <partial name="Details/_UserActivity" />
+                </article>
+            </div>
+        </div>
+    </div>
+</div>

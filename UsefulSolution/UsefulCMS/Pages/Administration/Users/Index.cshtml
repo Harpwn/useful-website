@@ -45,7 +45,9 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.UserName)
+                            <a href="@Url.Page("/Administration/Users/Details", new { id=item.Id })">
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </a>
                             @if (item.IsBanned)
                             {
                                 <span class="tag is-danger">Banned</span>

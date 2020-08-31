@@ -1,0 +1,58 @@
+﻿@page
+
+@using UsefulCore.Enums.Moderation;
+
+@model UsefulCMS.Pages.Administration.Users.BanUserModel
+@{
+    ViewData["Title"] = "Ban This User - " + Model.UserName;
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    ViewData["IconClass"] = "fa-user-slash";
+}
+<div class="tile is-ancestor">
+    <div class="tile is-vertical is-12">
+        <div class="tile is-parent">
+            <article class="tile is-child notification is-white">
+                <form method="post" role="form" asp-page-handler="userban">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <partial name="_ValidationSummary" />
+                    <div class="field">
+                        <label asp-for="BanReason"></label>
+                        <div class="control has-icons-left">
+                            <input asp-for="BanReason"
+                                   type="text"
+                                   placeholder="e.g. racism,trolling,bot,spam"
+                                   class="input"
+                                   required />
+                            <span class="icon is-small is-left">
+                                <i class="fa fa-comment-alt"></i>
+                            </span>
+                        </div>
+                        <span asp-validation-for="BanReason" class="help is-danger"></span>
+                    </div>
+                    <div class="field">
+                        <label asp-for="BanDuration"></label>
+                        <div class="control has-icons-left">
+                            <div class="select">
+                                <select asp-for="BanDuration">
+                                    @foreach (UserBanDuration duration in (UserBanDuration[])Enum.GetValues(typeof(UserBanDuration)))
+                                    {
+                                        <option value="@duration">@duration.GetDisplayName()</option>
+                                    }
+                                </select>
+                            </div>
+                            <span class="icon is-small is-left">
+                                <i class="fa fa-clock"></i>
+                            </span>
+                        </div>
+                        <span asp-validation-for="BanDuration" class="help is-danger"></span>
+                    </div>
+                    <div class="field">
+                        <button type="submit" class="button is-success">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </article>
+        </div>
+    </div>
+</div>

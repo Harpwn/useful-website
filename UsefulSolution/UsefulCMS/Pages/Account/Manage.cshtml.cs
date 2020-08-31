@@ -26,27 +26,6 @@ namespace UsefulCMS.Pages.Account
         [Display(Name = "Email Address")]
         public string EmailAddress { get; set; }
 
-        [BindProperty]
-        public ChangePasswordInputModel ChangePasswordInput { get; set; }
-        public class ChangePasswordInputModel
-        {
-            [Required]
-            [DataType(DataType.Password)]
-            [Display(Name = "Old Password")]
-            public string OldPassword { get; set; }
-
-            [Required]
-            [DataType(DataType.Password)]
-            [Display(Name = "New Password")]
-            public string NewPassword { get; set; }
-
-            [Required]
-            [DataType(DataType.Password)]
-            [Display(Name = "Confirm New Password")]
-            [Compare(nameof(NewPassword))]
-            public string NewPasswordConfirm { get; set; }
-        }
-
         public bool CanDelete => Username != "SuperAdmin";
 
         public ManageModel(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper) : base(mapper)
@@ -64,7 +43,6 @@ namespace UsefulCMS.Pages.Account
         {
             if (ModelState.IsValid)
             {
-
                 var user = await _userManager.GetUserAsync(HttpContext.User);
 
                 if (CanDelete)
@@ -93,26 +71,7 @@ namespace UsefulCMS.Pages.Account
             return await LoadPage();
         }
 
-        public async Task<IActionResult> OnPostChangePasswordAsync()
-        {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            if (!await _userManager.CheckPasswordAsync(user, ChangePasswordInput.OldPassword))
-                ModelState.AddModelError("ChangePasswordInput.OldPassword", "Incorrect Password");
-
-            if (ModelState.IsValid)
-            {
-                var result = await _userManager.ChangePasswordAsync(user, ChangePasswordInput.OldPassword, ChangePasswordInput.NewPassword);
-                if (!result.Succeeded)
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("ChangePasswordInput", error.Description);
-                    }
-                }
-            }
-
-            return await LoadPage();
-        }
+        
 
         private async Task<IActionResult> LoadPage()
         {

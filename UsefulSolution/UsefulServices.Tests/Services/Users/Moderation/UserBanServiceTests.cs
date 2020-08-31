@@ -38,11 +38,11 @@ namespace UsefulServices.Tests.Services.Users.Moderation
         public async Task BanUser_BansUser()
         {
             //ARRANGE
-            var id = "0";
+            var id = 0;
             var banDuration = new TimeSpan(6, 6, 6);
             var bannedReason = "test";
             var user = new User();
-            mockUserManager.Setup(x => x.FindByIdAsync(id)).ReturnsAsync(user);
+            mockUserManager.Setup(x => x.FindByIdAsync(id.ToString())).ReturnsAsync(user);
 
             var result = await Service(userManager: mockUserManager.Object).BanUser(id, bannedReason, banDuration);
 
@@ -56,10 +56,10 @@ namespace UsefulServices.Tests.Services.Users.Moderation
         [Fact]
         public async Task BanUser_DoesntBanUser_WhenDoesntExist()
         {
-            var id = "0";
+            var id = 0;
             var banDuration = new TimeSpan(6, 6, 6);
             var bannedReason = "test";
-            mockUserManager.Setup(x => x.FindByIdAsync(id)).ReturnsAsync((User)null);
+            mockUserManager.Setup(x => x.FindByIdAsync(id.ToString())).ReturnsAsync((User)null);
 
             var result = await Service(userManager: mockUserManager.Object).BanUser(id, bannedReason, banDuration);
 
@@ -70,10 +70,10 @@ namespace UsefulServices.Tests.Services.Users.Moderation
         [Fact]
         public async Task UnBanUser_DoesntUnBanUser_WhenDoesntExist()
         {
-            var id = "0";
+            var id = 0;
             var banDuration = new TimeSpan(6, 6, 6);
             var bannedReason = "test";
-            mockUserManager.Setup(x => x.FindByIdAsync(id)).ReturnsAsync((User)null);
+            mockUserManager.Setup(x => x.FindByIdAsync(id.ToString())).ReturnsAsync((User)null);
 
             var result = await Service(userManager: mockUserManager.Object).UnbanUser(id);
 
@@ -85,9 +85,9 @@ namespace UsefulServices.Tests.Services.Users.Moderation
         public async Task UnBanUser_UnBansUser()
         {
             //ARRANGE
-            var id = "0";
+            var id = 0;
             var user = new User();
-            mockUserManager.Setup(x => x.FindByIdAsync(id)).ReturnsAsync(user);
+            mockUserManager.Setup(x => x.FindByIdAsync(id.ToString())).ReturnsAsync(user);
 
             var result = await Service(userManager: mockUserManager.Object).UnbanUser(id);
 

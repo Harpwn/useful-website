@@ -5,7 +5,7 @@ namespace UsefulServices.Services.Users.Moderation
 {
     public interface IUserBanService
     {
-        Task<ServiceActionResult> BanUser(string id, string reason, TimeSpan banDuration);
-        Task<ServiceActionResult> UnbanUser(string id);
+        Task<ServiceActionResult> BanUser(int id, string reason, TimeSpan banDuration);
+        Task<ServiceActionResult> UnbanUser(int id);
     }
 }

@@ -19,9 +19,9 @@ namespace UsefulServices.Services.Users.Moderation
             _userManager = userManager;
         }
 
-        public async Task<ServiceActionResult> BanUser(string id, string reason, TimeSpan banDuration)
+        public async Task<ServiceActionResult> BanUser(int id, string reason, TimeSpan banDuration)
         {
-            var user =  await _userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(id.ToString());
 
             if (user == null)
                 return new ServiceActionResult("User not found");
@@ -34,9 +34,9 @@ namespace UsefulServices.Services.Users.Moderation
             return new ServiceActionResult();
         }
 
-        public async Task<ServiceActionResult> UnbanUser(string id)
+        public async Task<ServiceActionResult> UnbanUser(int id)
         {
-            var user = await _userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(id.ToString());
 
             if (user == null)
                 return new ServiceActionResult("User not found");
