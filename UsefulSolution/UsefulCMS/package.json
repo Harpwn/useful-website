@@ -7,7 +7,7 @@
   "author": "harpwn",
   "license": "MIT",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.13.0",
+    "@fortawesome/fontawesome-free": "^5.14.0",
     "bulma": "^0.8.2",
     "del": "^5.1.0",
     "gulp": "^4.0.2",
@@ -18,7 +18,7 @@
     "gulp-uglify": "^3.0.2",
     "gulp-uglify-es": "^2.0.0",
     "merge-stream": "^2.0.0",
-    "node-sass": "^4.14.0",
+    "node-sass": "^4.14.1",
     "rimraf": "^3.0.2"
   }
 }
