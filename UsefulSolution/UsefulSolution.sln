@@ -3,31 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsefulCMS", "UsefulCMS\UsefulCMS.csproj", "{99073330-A008-49E2-BF12-E950124C8DF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsefulCMS", "UsefulCMS\UsefulCMS.csproj", "{99073330-A008-49E2-BF12-E950124C8DF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsefulDatabase", "UsefulDatabase\UsefulDatabase.csproj", "{32E54333-461D-400E-A10E-A5F0DEDD9C9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsefulDatabase", "UsefulDatabase\UsefulDatabase.csproj", "{32E54333-461D-400E-A10E-A5F0DEDD9C9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsefulCore", "UsefulCore\UsefulCore.csproj", "{25599744-D8E7-4D8E-9CD2-03F667A85C08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsefulCore", "UsefulCore\UsefulCore.csproj", "{25599744-D8E7-4D8E-9CD2-03F667A85C08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsefulServices", "UsefulServices\UsefulServices.csproj", "{C831306D-4BFC-492D-8140-0338F4E93F3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsefulServices", "UsefulServices\UsefulServices.csproj", "{C831306D-4BFC-492D-8140-0338F4E93F3B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulTests", "UsefulTests", "{2FFAB053-B1B1-44E1-AFCF-F8AB80ED137F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsefulTestingCore", "UsefulTestingCore\UsefulTestingCore.csproj", "{1EF8C467-1273-45AD-BE4F-C0BA4D772478}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsefulTestingCore", "UsefulTestingCore\UsefulTestingCore.csproj", "{1EF8C467-1273-45AD-BE4F-C0BA4D772478}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsefulCMS.Tests", "UsefulCMS.Tests\UsefulCMS.Tests.csproj", "{D9C0A713-752C-48B6-BCCB-69FF67AF7A2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsefulCMS.Tests", "UsefulCMS.Tests\UsefulCMS.Tests.csproj", "{D9C0A713-752C-48B6-BCCB-69FF67AF7A2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsefulCore.Tests", "UsefulCore.Tests\UsefulCore.Tests.csproj", "{45FBD5B3-170D-4CB3-A6A8-77A07EEE4F04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsefulCore.Tests", "UsefulCore.Tests\UsefulCore.Tests.csproj", "{45FBD5B3-170D-4CB3-A6A8-77A07EEE4F04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsefulDatabase.Tests", "UsefulDatabase.Tests\UsefulDatabase.Tests.csproj", "{83E6D86B-B671-47D4-A701-3D92946E32DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsefulDatabase.Tests", "UsefulDatabase.Tests\UsefulDatabase.Tests.csproj", "{83E6D86B-B671-47D4-A701-3D92946E32DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsefulServices.Tests", "UsefulServices.Tests\UsefulServices.Tests.csproj", "{47D80AD0-E6C5-4B73-B51C-36D040B3968D}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8F9C80B8-9F4D-4024-AED3-FA64CE73A414}"
-	ProjectSection(SolutionItems) = preProject
-		NewSiteSteps.txt = NewSiteSteps.txt
-		Readme.txt = Readme.txt
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsefulServices.Tests", "UsefulServices.Tests\UsefulServices.Tests.csproj", "{47D80AD0-E6C5-4B73-B51C-36D040B3968D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using UsefulCMS.Pages;
 using UsefulCore.Enums.Roles;
 using UsefulDatabase.Model;
+using UsefulDatabase.Model.Roles;
 using UsefulDatabase.Model.Users;
 using UsefulTestingCore.Fakes.Identity;
 using UsefulTestingCore.Fixtures;
@@ -18,13 +19,6 @@ namespace UsefulCMS.Tests.Pages
 {
     public class IndexModelTests : CMSModelTests
     {
-        private readonly Mock<FakeUserManager> mockUserManager;
-
-        public IndexModelTests()
-        {
-            mockUserManager = new Mock<FakeUserManager>();
-        }
-
         public IndexModel GetIndexModel(
             UsefulContext context = null,
             IMapper mapper = null) => new IndexModel(
@@ -37,15 +31,22 @@ namespace UsefulCMS.Tests.Pages
             //ARRANGE
             var fixture = new DatabaseFixture();
             var model = GetIndexModel(fixture.Context, mapper);
+            fixture.Context.Users.AddRange(new List<User>
+            {
+                new User { Roles = new List<UserRole> { new UserRole { Role = new Role { Name = RoleType.Standard.ToString() } } } },
+                new User { Roles = new List<UserRole> { new UserRole { Role = new Role { Name = RoleType.SuperAdministrator.ToString() } } } },
+                new User { Roles = new List<UserRole> { new UserRole { Role = new Role { Name = RoleType.Administrator.ToString() } } } },
+            });
+            fixture.Context.SaveChanges();
 
             //ACT
             await model.OnGetAsync();
 
             //ASSERT
             Assert.Equal(1, model.StandardCount);
-            Assert.Equal(3, model.SuperAdminCount);
-            Assert.Equal(2, model.AdminCount);
-            Assert.Equal(6, model.UserCount);
+            Assert.Equal(1, model.SuperAdminCount);
+            Assert.Equal(1, model.AdminCount);
+            Assert.Equal(3, model.UserCount);
         }
     }
 }
