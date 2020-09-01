@@ -6,37 +6,39 @@
     ViewData["IconClass"] = "fa-tachometer-alt";
 }
 
-<h3 class="title is-4 is-warning has-text-white">
-    <span class="icon">
-        <i class="fas fa-users"></i>
-    </span> 
-    Users &amp; Roles
-</h3>
-<section class="section box">
-    <nav class="level">
-        <div class="level-item has-text-centered">
-            <div>
-                <p class="heading">Total</p>
-                <p class="title">@Model.UserCount</p>
+<div class="container">
+    <h3 class="title is-4 is-warning has-text-white">
+        <span class="icon">
+            <i class="fas fa-users"></i>
+        </span>
+        Users &amp; Roles
+    </h3>
+    <section class="section box">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Total</p>
+                    <p class="title">@Model.UserCount</p>
+                </div>
             </div>
-        </div>
-        <div class="level-item has-text-centered">
-            <div>
-                <p class="heading">Standard</p>
-                <p class="title">@Model.StandardCount</p>
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Standard</p>
+                    <p class="title">@Model.StandardCount</p>
+                </div>
             </div>
-        </div>
-        <div class="level-item has-text-centered">
-            <div>
-                <p class="heading">Administrator</p>
-                <p class="title">@Model.AdminCount</p>
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Administrator</p>
+                    <p class="title">@Model.AdminCount</p>
+                </div>
             </div>
-        </div>
-        <div class="level-item has-text-centered">
-            <div>
-                <p class="heading">SuperAdmin</p>
-                <p class="title">@Model.SuperAdminCount</p>
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">SuperAdmin</p>
+                    <p class="title">@Model.SuperAdminCount</p>
+                </div>
             </div>
-        </div>
-    </nav>
-</section>
+        </nav>
+    </section>
+</div>
