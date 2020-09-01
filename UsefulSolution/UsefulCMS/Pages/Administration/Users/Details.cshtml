@@ -1,4 +1,6 @@
 ﻿@page
+
+@using UsefulCore.Enums.Roles
 @model UsefulCMS.Pages.Administration.Users.DetailsModel
 @{
     ViewData["Title"] = Model.UserDetails.UserName;
@@ -11,6 +13,20 @@
         @if (!Model.UserDetails.IsBanned)
         {
             <a class="button is-danger" href="@Url.Page("/Administration/Users/BanUser", new { id=Model.Id })">Ban User</a>
+        }
+        @if (Model.CanBePromoted)
+        {
+            <form asp-page-handler="PromoteUser" method="post">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <button type="submit" class="button is-success"><span class="icon mr-1"><i class="fa fa-angle-double-up"></i></span>Promote</button>
+            </form>
+        }
+        @if (Model.CanBeDemoted)
+        {
+            <form asp-page-handler="DemoteUser" method="post">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <button type="submit" class="button is-danger"><span class="icon mr-1"><i class="fa fa-angle-double-down"></i></span>Demote</button>
+            </form>
         }
     </div>
     @if (Model.UserDetails.IsBanned)
@@ -32,6 +48,32 @@
             </div>
         </article>
     }
+    <article class="notification is-white">
+        <h4 class="title is-4">Details</h4>
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <tr>
+                <td>ID</td>
+                <td>@Model.UserDetails.Id</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>@Model.UserDetails.Email</td>
+            </tr>
+            <tr>
+                <td>Username</td>
+                <td>@Model.UserDetails.UserName</td>
+            </tr>
+            <tr>
+                <td>Roles</td>
+                <td>
+                    @foreach (var role in Model.UserDetails.Roles)
+                    {
+                        <span class="tag @role.Role.Type.RoleTypeIconClass()">@role.Role.Type.GetDisplayName()</span>
+                    }
+                </td>
+            </tr>
+        </table>
+    </article>
     <article class="notification is-white">
         <section class="hero">
             <div class="hero-body">
