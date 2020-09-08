@@ -1,20 +1,14 @@
-﻿using AutoMapper;
-using Microsoft.Extensions.Caching.Memory;
-using UsefulDatabase.Model;
+﻿using UsefulDatabase.Model;
 
 namespace UsefulServices.Services
 {
     public abstract class Service
     {
         protected UsefulContext Context;
-        protected IMemoryCache Cache;
-        protected IMapper Mapper;
 
-        public Service(UsefulContext context, IMemoryCache cache, IMapper mapper)
+        public Service(UsefulContext context)
         {
             Context = context;
-            Cache = cache;
-            Mapper = mapper;
         }
     }
 }

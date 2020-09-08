@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Caching.Memory;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using UsefulDatabase.Model;
 using UsefulDatabase.Model.Users;
@@ -15,7 +13,7 @@ using Xunit;
 
 namespace UsefulServices.Tests.Services.Users.Moderation
 {
-    public class UserBanServiceTests : ServiceTests
+    public class UserBanServiceTests
     {
         private readonly Mock<FakeUserManager> mockUserManager;
 
@@ -30,9 +28,7 @@ namespace UsefulServices.Tests.Services.Users.Moderation
             IMemoryCache cache = null,
             IMapper mapper = null) => new UserBanService(
                 context ?? new DatabaseFixture().Context,
-                userManager ?? new Mock<FakeUserManager>().Object,
-                cache ?? new Mock<IMemoryCache>().Object,
-                mapper ?? new Mock<IMapper>().Object);
+                userManager ?? new Mock<FakeUserManager>().Object);
 
         [Fact]
         public async Task BanUser_BansUser()

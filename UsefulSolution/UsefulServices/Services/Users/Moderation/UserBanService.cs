@@ -12,7 +12,7 @@ namespace UsefulServices.Services.Users.Moderation
     {
         private UserManager<User> _userManager;
 
-        public UserBanService(UsefulContext context, UserManager<User> userManager, IMemoryCache cache, IMapper mapper) : base(context, cache, mapper)
+        public UserBanService(UsefulContext context, UserManager<User> userManager) : base(context)
         {
             _userManager = userManager;
         }

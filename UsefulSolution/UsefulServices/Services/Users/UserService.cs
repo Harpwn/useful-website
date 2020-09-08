@@ -12,10 +12,12 @@ namespace UsefulServices.Services.Users
     public class UserService : Service, IUserService
     {
         private UserManager<User> _userManager;
+        private IMapper _mapper;
 
-        public UserService(UsefulContext context, UserManager<User> userManager, IMemoryCache cache, IMapper mapper) : base(context, cache, mapper)
+        public UserService(UsefulContext context, UserManager<User> userManager, IMapper mapper) : base(context)
         {
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         public async Task<UserActionResult> GetByIDAsync(string id)
@@ -25,7 +27,7 @@ namespace UsefulServices.Services.Users
             if (existingUser == null)
                 return new UserActionResult("User not found");
 
-            return new UserActionResult(Mapper.Map<UserSummary>(existingUser));
+            return new UserActionResult(_mapper.Map<UserSummary>(existingUser));
         }
     }
 }

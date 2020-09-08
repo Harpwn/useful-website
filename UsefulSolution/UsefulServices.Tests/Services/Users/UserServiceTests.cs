@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Caching.Memory;
 using Moq;
 using System.Threading.Tasks;
 using UsefulDatabase.Model;
@@ -12,23 +11,28 @@ using Xunit;
 
 namespace UsefulServices.Tests.Services.Users
 {
-    public class UserServiceTests : ServiceTests
+    public class UserServiceTests
     {
         private readonly Mock<FakeUserManager> mockUserManager;
+        private readonly IMapper mapper;
 
         public UserServiceTests()
         {
             mockUserManager = new Mock<FakeUserManager>();
+            var configuration = new MapperConfiguration(cfg =>
+                cfg.AddMaps(new[] {
+                    "UsefulServices",
+                })
+            );
+            mapper = new Mapper(configuration);
         }
 
         public UserService GetUserService(
             UsefulContext context = null,
             UserManager<User> userManager = null,
-            IMemoryCache cache = null,
             IMapper mapper = null) => new UserService(
                 context ?? new DatabaseFixture().Context,
                 userManager ?? new Mock<FakeUserManager>().Object,
-                cache ?? new Mock<IMemoryCache>().Object,
                 mapper ?? new Mock<IMapper>().Object);
 
         [Fact]
